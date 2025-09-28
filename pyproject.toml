@@ -1,0 +1,34 @@
+# ==========================================
+# Arquivo de Configuração do Projeto
+# ==========================================
+
+[project]
+name = "conversor-arquivos-multimidia"
+version = "1.0.0"
+description = "Conversor de arquivos multimídia com interface web moderna"
+authors = ["Seu Nome <seu@email.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/seu-usuario/conversor-arquivos"
+repository = "https://github.com/seu-usuario/conversor-arquivos"
+keywords = ["converter", "multimedia", "video", "audio", "image", "ffmpeg"]
+
+[project.urls]
+"Bug Reports" = "https://github.com/seu-usuario/conversor-arquivos/issues"
+"Source" = "https://github.com/seu-usuario/conversor-arquivos"
+"Documentation" = "https://github.com/seu-usuario/conversor-arquivos/wiki"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]

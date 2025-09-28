@@ -1,0 +1,54 @@
+# ==========================================# ==========================================
+
+# Conversor de Arquivos Multimídia# Sistema de Conversão de Arquivos
+
+# Dependências Python Essenciais# Dependências Python - requirements.txt
+
+# ==========================================# ==========================================
+
+
+
+# Framework Web# ==================== FRAMEWORK WEB ====================
+
+fastapi>=0.104.0fastapi>=0.104.0          # API REST moderna e rápida
+
+uvicorn>=0.24.0uvicorn>=0.24.0            # Servidor ASGI para FastAPI
+
+python-multipart>=0.0.6python-multipart>=0.0.6   # Upload de arquivos
+
+
+
+# Processamento de Imagens# ==================== PROCESSAMENTO DE IMAGENS ====================
+
+Pillow>=10.0.0Pillow>=10.0.0             # Biblioteca principal para imagens
+
+                           # Suporta: JPG, PNG, GIF, BMP, TIFF, WEBP
+
+# Nota: FFmpeg deve ser instalado separadamente no sistema
+
+# - Windows: winget install Gyan.FFmpeg# ==================== PROCESSAMENTO DE VÍDEO/ÁUDIO ====================
+
+# - Ubuntu/Debian: sudo apt install ffmpeg# Nota: FFmpeg deve ser instalado separadamente no sistema
+
+# - macOS: brew install ffmpeg# ffmpeg-python>=0.2.0    # Interface Python para FFmpeg (opcional)
+
+# ==================== PROCESSAMENTO DE DOCUMENTOS ====================
+# Bibliotecas opcionais para conversão de documentos
+# docx2pdf>=0.1.8         # Word para PDF (Windows/LibreOffice)
+# pdf2docx>=0.5.6         # PDF para Word
+# pywin32>=306            # Interface COM do Windows
+
+# ==================== PROCESSAMENTO DE ÁUDIO ====================
+# pydub>=0.25.1           # Conversão de áudio (requer FFmpeg)
+
+# ==================== UTILITÁRIOS OPCIONAIS ====================
+# python-magic>=0.4.27    # Detecção automática de tipo de arquivo
+# requests>=2.31.0        # Para testes da API
+
+# ==================== DESENVOLVIMENTO E TESTES ====================
+# pytest>=7.0.0           # Framework de testes
+# pytest-cov>=4.0.0       # Cobertura de testes
+
+# ==================== DEPENDÊNCIAS MÍNIMAS PARA FUNCIONAMENTO ====================
+# Para instalação básica (apenas vídeo via FFmpeg externo):
+# pip install fastapi uvicorn python-multipart Pillow

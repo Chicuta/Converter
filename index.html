@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Meta tags essenciais -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conversor de arquivos simples e rápido. Suporta vídeos, imagens, áudio e documentos.">
+    
+    <!-- Título e ícones -->
+    <title>Conversor de Arquivos</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Container principal -->
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-file-export" aria-hidden="true"></i>
+                <h1>Conversor de Arquivos</h1>
+            </div>
+            <p class="subtitle">Converta seus arquivos de forma simples e rápida</p>
+        </header>
+
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+            <!-- Seção de Upload -->
+            <section class="upload-section">
+                <!-- Área de upload com drag & drop -->
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt upload-icon" aria-hidden="true"></i>
+                        <h3>Arraste e solte seus arquivos aqui</h3>
+                        <p>ou <span class="browse-text">clique para procurar</span></p>
+                        <p class="upload-hint">Suporte para múltiplos arquivos (máximo 10)</p>
+                        <input type="file" id="fileInput" accept="*/*" multiple hidden aria-label="Selecionar arquivos">
+                    </div>
+                </div>
+                
+                <!-- Informações do arquivo selecionado -->
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <div class="file-details">
+                        <i class="fas fa-file file-icon" aria-hidden="true"></i>
+                        <div class="file-text">
+                            <span class="file-name" id="fileName"></span>
+                            <span class="file-size" id="fileSize"></span>
+                        </div>
+                        <button class="remove-file" id="removeFile" aria-label="Remover arquivo">
+                            <i class="fas fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Format Selection -->
+            <section class="format-section" id="formatSection" style="display: none;">
+                <h3>Selecione o formato de saída</h3>
+                
+                <div class="format-categories">
+                    <div class="category-tabs">
+                        <button class="tab-btn active" data-category="video">
+                            <i class="fas fa-video"></i>
+                            Vídeo
+                        </button>
+                        <button class="tab-btn" data-category="image">
+                            <i class="fas fa-image"></i>
+                            Imagem
+                        </button>
+                        <button class="tab-btn" data-category="audio">
+                            <i class="fas fa-music"></i>
+                            Áudio
+                        </button>
+                        <button class="tab-btn" data-category="document">
+                            <i class="fas fa-file-alt"></i>
+                            Documento
+                        </button>
+                    </div>
+
+                    <div class="format-grid" id="formatGrid">
+                        <!-- Formats will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Advanced Options -->
+                <div class="advanced-options" id="advancedOptions" style="display: none;">
+                    <h4>Opções Avançadas</h4>
+                    
+                    <!-- Video Options -->
+                    <div class="options-group" id="videoOptions" style="display: none;">
+                        <div class="option-row">
+                            <label for="codec">Codec:</label>
+                            <select id="codec">
+                                <option value="libx264" selected>H.264 (Recomendado)</option>
+                                <option value="libx265">H.265/HEVC</option>
+                                <option value="libvpx-vp9">VP9</option>
+                            </select>
+                        </div>
+                        <div class="option-row">
+                            <label for="quality">Qualidade:</label>
+                            <select id="quality">
+                                <option value="18">Ultra Alta (CRF 18)</option>
+                                <option value="20">Alta (CRF 20)</option>
+                                <option value="23" selected>Padrão (CRF 23)</option>
+                                <option value="26">Boa (CRF 26)</option>
+                                <option value="28">Baixa (CRF 28)</option>
+                            </select>
+                        </div>
+                        <div class="option-row">
+                            <label for="preset">Velocidade:</label>
+                            <select id="preset">
+                                <option value="ultrafast">Ultra Rápido</option>
+                                <option value="superfast">Super Rápido</option>
+                                <option value="veryfast">Muito Rápido</option>
+                                <option value="faster">Rápido</option>
+                                <option value="fast">Rápido Médio</option>
+                                <option value="medium" selected>Médio</option>
+                                <option value="slow">Lento (Melhor)</option>
+                                <option value="slower">Mais Lento</option>
+                                <option value="veryslow">Muito Lento</option>
+                            </select>
+                        </div>
+                        <div class="option-row">
+                            <label for="resolution">Resolução:</label>
+                            <select id="resolution">
+                                <option value="">Original</option>
+                                <option value="3840x2160">4K (3840x2160)</option>
+                                <option value="1920x1080">1080p (1920x1080)</option>
+                                <option value="1280x720">720p (1280x720)</option>
+                                <option value="854x480">480p (854x480)</option>
+                                <option value="640x360">360p (640x360)</option>
+                            </select>
+                        </div>
+                        <div class="option-row">
+                            <label for="fps">FPS:</label>
+                            <select id="fps">
+                                <option value="">Original</option>
+                                <option value="24">24 fps (Cinema)</option>
+                                <option value="25">25 fps (PAL)</option>
+                                <option value="30">30 fps</option>
+                                <option value="60">60 fps</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Image Options -->
+                    <div class="options-group" id="imageOptions" style="display: none;">
+                        <div class="option-row">
+                            <label for="imageQuality">Qualidade:</label>
+                            <input type="range" id="imageQuality" min="10" max="100" value="95">
+                            <span id="qualityValue">95%</span>
+                        </div>
+                    </div>
+
+                    <!-- Audio Options -->
+                    <div class="options-group" id="audioOptions" style="display: none;">
+                        <div class="option-row">
+                            <label for="bitrate">Bitrate:</label>
+                            <select id="bitrate">
+                                <option value="128">128 kbps</option>
+                                <option value="192" selected>192 kbps</option>
+                                <option value="256">256 kbps</option>
+                                <option value="320">320 kbps</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="convert-section">
+                    <button class="convert-btn" id="convertBtn" disabled>
+                        <i class="fas fa-play"></i>
+                        Converter
+                    </button>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section class="progress-section" id="progressSection" style="display: none;">
+                <div class="progress-content">
+                    <div class="progress-header">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <h3>Processando...</h3>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">Preparando conversão...</p>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="result-content">
+                    <div class="result-success" id="resultSuccess" style="display: none;">
+                        <i class="fas fa-check-circle success-icon"></i>
+                        <h3>Arquivo convertido</h3>
+                        <p>A conversão foi concluída com sucesso.</p>
+                        <button class="download-btn" id="downloadBtn">
+                            <i class="fas fa-download"></i>
+                            Baixar
+                        </button>
+                    </div>
+                    
+                    <div class="result-error" id="resultError" style="display: none;">
+                        <i class="fas fa-exclamation-circle error-icon"></i>
+                        <h3>Erro na conversão</h3>
+                        <p id="errorMessage">Ocorreu um erro durante a conversão.</p>
+                    </div>
+                    
+                    <button class="new-conversion-btn" id="newConversionBtn">
+                        <i class="fas fa-redo"></i>
+                        Converter Outro
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="supported-formats">
+                <h4>Formatos Suportados:</h4>
+                <div class="format-list">
+                    <div class="format-category">
+                        <strong>Vídeo:</strong> MP4, AVI, MOV, MKV, WMV, FLV, WEBM, 3GP e mais
+                    </div>
+                    <div class="format-category">
+                        <strong>Imagem:</strong> JPG, PNG, BMP, GIF, TIFF, WEBP, HEIC e mais
+                    </div>
+                    <div class="format-category">
+                        <strong>Áudio:</strong> MP3, WAV, FLAC, AAC, OGG, M4A, WMA e mais
+                    </div>
+                    <div class="format-category">
+                        <strong>Documento:</strong> PDF, DOCX, PPTX, XLSX, TXT, RTF e mais
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

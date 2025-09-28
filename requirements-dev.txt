@@ -1,0 +1,23 @@
+# ====================================
+# Configuração de Desenvolvimento
+# ====================================
+
+# Para instalação completa em desenvolvimento
+fastapi>=0.104.0
+uvicorn>=0.24.0
+python-multipart>=0.0.6
+Pillow>=10.0.0
+
+# Para desenvolvimento e testes
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-asyncio>=0.21.0
+
+# Para análise de código
+flake8>=6.0.0
+black>=23.0.0
+isort>=5.12.0
+
+# Para documentação
+mkdocs>=1.5.0
+mkdocs-material>=9.0.0
